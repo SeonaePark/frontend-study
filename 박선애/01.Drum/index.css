@@ -15,17 +15,31 @@ html, body{
     justify-content: center;
 }
 .key{
-    border: 2px solid rgba(0, 0, 0, 0.7);
+    border: 3px solid rgba(0, 0, 0, 0.7);
     border-radius: 5px;
     font-size: 20px;
     margin: 8px;
     padding: 10px 25px;
+    color: white;
     text-align: center;
+    background: rgba(0, 0, 0, 0.2);
+    text-shadow: 0 0 .5rem black;
+    transition: all .07s ease;
+    width: 9rem;
+}
+.playing{
+    transform: scale(1.5);
+    border-color: #ffc800c2; 
+
 }
 kbd{
     display: block;
-    font-size: 25px;
+    font-size: 2.5rem;
 }
 .sound{
-    color: #ffc600;
+    color: #ffc800c2;
+    font-size: 15px;
+    text-transform: uppercase;
+    letter-spacing: .1rem;
+    text-align: center;
 }
