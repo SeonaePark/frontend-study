@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Update CSS Variables with <span class="js">JS</span></h2>
+
+    <div class="controls">
+        <label for="spacing">Spacing:</label>
+        <input id="spacing" type="range" name="spacing" min="10" max="200" value="10" data-sizing="px">
+    
+        <label for="blur">Blur:</label>
+        <input id="blur" type="range" name="blur" min="0" max="25" value="10" data-sizing="px">
+    
+        <label for="base">Base Color</label>
+        <input id="base" type="color" name="base" value="#ffc600">
+      </div>
+
+    <img src="https://images.unsplash.com/photo-1620029613205-e8a450f34870?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80">
+    
+    <style>
+        :root { /* 루트요소 html{} 보다 높은 우선순위*/
+        --base: #ffc600; /*변수 */
+        --spacing: 10px;
+        --blur: 10px;
+        }
+        img {
+        padding: var(--spacing);
+        background: var(--base);
+        filter: blur(var(--blur));
+        width: 700px;
+        }
+        .js {
+        color: var(--base);
+        }
+        body{
+            background: rgb(130, 137, 238);
+            font-size: 40px;
+            text-align: center;
+            font-family: 'helvetica neue', sans-serif;
+        }
+        .controls{
+            margin-bottom: 30px;
+        }
+        input{
+            width: 100px;
+        }
+    </style>
+    <script>
+       const inputs = document.querySelectorAll('.controls input');
+
+        function handleUpdate() {
+        const suffix = this.dataset.sizing || ''; // 컬러값은 datasizing이 없기 때문에 || 없으면 undefined 뜸. 그래서 값이 없는 경우 공백 나오도록 처리
+        document.documentElement.style.setProperty(`--${this.name}`, this.value + suffix); // css속성 재할당 시킴
+        }
+
+        inputs.forEach(input => input.addEventListener('change', handleUpdate)); // 마우스 움직임이 끝난 순간만 포착
+        inputs.forEach(input => input.addEventListener('mousemove', handleUpdate)); // 드래그 하는 도중
+    </script>
+</body>
+</html>
