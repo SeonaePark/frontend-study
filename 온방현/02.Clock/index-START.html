@@ -12,13 +12,16 @@
         <div class="hand hour-hand"></div>
         <div class="hand min-hand"></div>
         <div class="hand second-hand"></div>
+        <div class="hand ms-hand"></div>
+        <div class="point"></div>
+
       </div>
     </div>
 
 
   <style>
     html {
-      background: #018DED url(https://unsplash.it/1500/1000?image=881&blur=5);
+      background: url(https://pbs.twimg.com/media/CJhy3lkXAAAIwXR.jpg);
       background-size: cover;
       font-family: 'helvetica neue';
       text-align: center;
@@ -38,7 +41,7 @@
       width: 30rem;
       height: 30rem;
       border: 20px solid white;
-      border-radius: 50%;
+      border-radius: 20%;
       margin: 50px auto;
       position: relative;
       padding: 2rem;
@@ -62,12 +65,51 @@
       background: black;
       position: absolute;
       top: 50%;
+      transform: rotate(90deg);
+      transform-origin: 100%;
+      border-radius: 50%;
+    }
+
+    .ms-hand {
+      background : gray;
+    }
+
+    .point{
+      position: absolute;
+      margin: 14.5rem;
+      width: 1rem;
+      height: 1rem;
+      border-radius: 50px;
+      background: red;
     }
 
   </style>
 
   <script>
+    const ms = document.querySelector('.ms-hand');
+    const seconds = document.querySelector('.second-hand');
+    const minutes = document.querySelector('.min-hand');
+    const hour = document.querySelector('.hour-hand');
 
+    
+    function setdate () {
+      
+      const msDegrees = ((new Date().getMilliseconds() / 1000 )* 360 ) + 90;
+      ms.style.transform = `rotate(${msDegrees}deg)`;
+
+      const secondsDegrees = ((new Date().getSeconds() / 60 )* 360 ) + 90;
+      seconds.style.transform = `rotate(${secondsDegrees}deg)`;
+      
+      const minsDegrees = ((new Date().getMinutes() / 60 )* 360 ) + 90;
+      minutes.style.transform = `rotate(${minsDegrees}deg)`;
+
+      const hoursDegrees = ((new Date().getHours() / 12 )* 360 ) + 90;
+      hour.style.transform = `rotate(${hoursDegrees}deg)`;
+
+    }
+  
+    setInterval(setdate, 1);
+    setdate();
 
   </script>
 </body>
