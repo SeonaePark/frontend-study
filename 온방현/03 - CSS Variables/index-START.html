@@ -14,8 +14,8 @@
     <label for="blur">Blur:</label>
     <input id="blur" type="range" name="blur" min="0" max="25" value="0" data-sizing="px">
 
-    <label for="radious">Radious</label>
-    <input id="radious" type="range" name="radious" min="0" max="50" value="0" data-sizing="%">
+    <label for="radius">Radius</label>
+    <input id="radius" type="range" name="radius" min="0" max="50" value="0" data-sizing="%">
 
     <label for="base">Base Color</label>
     <input id="base" type="color" name="base" value="#ffc600">
@@ -30,7 +30,7 @@
       --spacing: 0px;
       --blur: 0px;
       --base: red;
-      --radious: 0%;
+      --radius: 0%;
     }
 
     .hl {
@@ -41,7 +41,7 @@
       padding: var(--spacing);
       filter: blur(var(--blur));
       background: var(--base);
-      border-radius: var(--radious);
+      border-radius: var(--radius);
     }
 
 
