@@ -27,6 +27,7 @@
         overflow: hidden;
         display: flex;
         }
+        
         .panel {
       background: #6B0F9C;
       box-shadow: inset 0 0 0 5px rgba(255,255,255,0.1);
@@ -56,7 +57,9 @@
       justify-content: center;
       align-items: center;
     }
+    /* 클릭 안 했을 때는 사라졌다가 */
     .panel > *:first-child { transform: translateY(-100%); }
+    /* 클릭하면 수직 방향으로 위치 방향 바뀜 */
     .panel.open-active > *:first-child { transform: translateY(0); }
     .panel > *:last-child { transform: translateY(100%); }
     .panel.open-active > *:last-child { transform: translateY(0); }

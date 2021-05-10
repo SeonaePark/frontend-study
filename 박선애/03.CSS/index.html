@@ -54,7 +54,7 @@
        const inputs = document.querySelectorAll('.controls input');
 
         function handleUpdate() {
-        const suffix = this.dataset.sizing || ''; // 컬러값은 datasizing이 없기 때문에 || 없으면 undefined 뜸. 그래서 값이 없는 경우 공백 나오도록 처리
+            const suffix = this.dataset.sizing || ''; // 컬러값은 datasizing이 없기 때문에 || 없으면 undefined 뜸. 그래서 값이 없는 경우 공백 나오도록 처리
         document.documentElement.style.setProperty(`--${this.name}`, this.value + suffix); // css속성 재할당 시킴
         }
 
