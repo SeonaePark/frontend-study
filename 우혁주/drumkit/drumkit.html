@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <meta charset="UTF-8">
+  <title>JS Drum Ki1</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+
+  <div class="keys">
+    <div data-key="65" class="key">
+      <kbd>A</kbd>
+      <span class="sound">clap</span>
+    </div>
+    <div data-key="83" class="key">
+      <kbd>S</kbd>
+      <span class="sound">hihat</span>
+    </div>
+    <div data-key="68" class="key">
+      <kbd>D</kbd>
+      <span class="sound">kick</span>
+    </div>
+    <div data-key="70" class="key">
+      <kbd>F</kbd>
+      <span class="sound">openhat</span>
+    </div>
+    <div data-key="71" class="key">
+      <kbd>G</kbd>
+      <span class="sound">boom</span>
+    </div>
+    <div data-key="72" class="key">
+      <kbd>H</kbd>
+      <span class="sound">ride</span>
+    </div>
+    <div data-key="74" class="key">
+      <kbd>J</kbd>
+      <span class="sound">snare</span>
+    </div>
+    <div data-key="75" class="key">
+      <kbd>K</kbd>
+      <span class="sound">tom</span>
+    </div>
+    <div data-key="76" class="key">
+      <kbd>L</kbd>
+      <span class="sound">tink</span>
+    </div>
+  </div>
+
+  <audio data-key="65" src="./clap.wav"></audio>
+  <audio data-key="83" src="./hihat.wav"></audio>
+  <audio data-key="68" src="./kick.wav"></audio>
+  <audio data-key="70" src="./openhat.wav"></audio>
+  <audio data-key="71" src="./boom.wav"></audio>
+  <audio data-key="72" src="./ride.wav"></audio>
+  <audio data-key="74" src="./snare.wav"></audio>
+  <audio data-key="75" src="./tom.wav"></audio>
+  <audio data-key="76" src="./tink.wav"></audio>
+
+<script>
+  // window.addEventListener('keydown', function(e) {
+  //   const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+  //   const key   = document.querySelector(`.key[data-key="${e.keyCode}"]`);  //애니메이션 주려고 추가했다.  .key : key라는 클래스 준 아이들
+  //   if(!audio) return;      //stop the function from running all together
+  //   audio.currentTime = 0;  //rewind to the start
+  //   audio.play();           // 끝날때 까지 다시 실행이 안된다.
+  //   //key.addClass('playing');  jquery 문장 
+  //   key.classList.add('playing');   //playing을 만들어서 css에 있는 .playing을 실행시킨다.
+  //   //key.classList.remove('playing');   등이 있음
+  //   //key.classList.toggle('playing');
+  // });
+  //   위의 문장들을 playsound 함수에 넣어서 밑에서 따로 실행 시킨다.
+  
+  function playSound(a) {
+    const audio = document.querySelector(`audio[data-key="${a.keyCode}"]`);
+    const key   = document.querySelector(`.key[data-key="${a.keyCode}"]`);  
+    if(!audio) return;      
+    audio.currentTime = 0;  
+    audio.play();           
+    key.classList.add('playing');  
+  }
+
+
+  // transition이 다시 사라지게 하는 작업 
+  function removeTransition(a) {
+    if(a.propertyName !== 'transform') return; //skip it if it's not a transform
+    //this 정리
+    this.classList.remove('playing');
+  }
+
+  const keys = document.querySelectorAll(".key");
+  // keys.addEventListener('transitionend') 배열을 사용했을때 이것을 사용하면 일일히 다 추가해줘야 하기떄문에 밑에처럼 한다(?)
+  keys.forEach(key => key.addEventListener('transitionend', removeTransition));
+  window.addEventListener('keydown', playSound);
+</script>
+
+
+</body>
+</html>
