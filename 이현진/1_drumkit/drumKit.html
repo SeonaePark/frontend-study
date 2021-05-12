@@ -59,7 +59,7 @@
 
 <script>
     // 재생 멈추는 함수
-    function removeTrasition(e){
+    function removeTransition(e){
         if(e.propertyName !== 'transform') return;
         e.target.classList.remove('playing');
     }
@@ -77,7 +77,7 @@
 
     // driver code
     const keys = Array.from(document.querySelectorAll('.key'));  //class명이 key인 모든 요소를 배열형태로 찾아와 저장
-    keys.forEach(key => key.addEventListener('transitioned', removeTrasition)); //transition이벤트가 종료되는 removeTransition함수를 수행하는 이벤트를 추가함
+    keys.forEach(key => key.addEventListener('transitionend', removeTransition)); //transition이벤트가 종료되는 removeTransition함수를 수행하는 이벤트를 추가함
     window.addEventListener('keydown',playSound); //keydown(키도를 누를 때) 사운드 재생 이벤트 실행
 </script>
 
