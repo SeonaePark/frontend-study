@@ -18,29 +18,72 @@
     }
 
     // Regular
+    console.log('hello')
 
     // Interpolated
-
+    console.log('Hello I am a %s string!', 'A')  //%s 안에 A를추가
+    
     // Styled
+    console.log('%c I am some great text', 'font-size:50px; background:red; text-shadow: 10px 10px 0 blue;')
+    // 효과 주기
 
     // warning!
-
+    console.warn('OH NOO');
+    // 주의표시
+    
     // Error :|
+    console.error('OH NOO');
+    // 에러표시
 
     // Info
+    console.info('Crocodiles eat 3-4 people per year');
+    // 정보표시
 
     // Testing
+    const p = document.querySelector('p'); //p태그 지정
+  
+    console.assert(p.classList.contains('ouch'), 'that is wrong!'); //
 
     // clearing
+    // console.clear(); // 전부 지우기 
 
     // Viewing DOM Elements
+    console.log(p); // Elements 표시
+    console.dir(p);
 
     // Grouping together
+    dogs.forEach(dog => {
+      console.group(`${dog.name}`);
+      console.log(`this is ${dog.name}`);
+      console.log(`${dog.name} is ${dog.age} years old`);
+      console.log(`${dog.name} is ${dog.age * 7} years old`);
+      console.groupEnd(`${dog.name}`);
+
+    })
 
     // counting
+    console.count('Wes');
+    console.count('Wes');
+    console.count('Steave');
+    console.count('Steave');
+    console.count('Steave');
+    console.count('Wes');
+    console.count('Wes');
+    console.count('Steave');
+    console.count('Steave');
+    console.count('Steave');
+    console.count('Steave');
 
     // timing
+    console.time('fetching data');
+    fetch('https://api.github.com/users/wesbos')
+    .then(data => data.json())
+    .then(data => {
+      console.timeEnd('fetching data');
+      console.log(data);
+    });
 
+    console.info('안녕');
   </script>
 </body>
 </html>
