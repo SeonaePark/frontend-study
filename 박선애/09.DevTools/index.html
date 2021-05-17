@@ -18,71 +18,73 @@
     }
 
     // Regular
-    console.log('hello');
+   console.log('hi');
 
     // Interpolated
-    console.log('hello %s', '~~');
+    console.log('%s kkkkk', '^^');
 
     // Styled
-    console.log('%c I am some great text','font-size: 50px; background: yellow;');
+    console.log('%c starting javascript!', 'font-size: 50px; background-color: red');
+    
 
     // warning!
-    console.warn('Oh No');
+    console.warn('warn!');
+   
 
     // Error :|
-    console.error('Oh No');
+   console.error('error');
 
     // Info
-    console.info('hi hihi');
+    console.info('info');
 
     // Testing
-    const p = document.querySelector('p');
+  const p = document.querySelector('p');
 
-    console.assert(p.classList.contains('ouch'), 'That is wrong');
+  console.assert(p.classList.contains('ouch'), 'That is wrong');
 
     // clearing
-    console.clear();
+    // console.clear();
 
     // Viewing DOM Elements
+    // 요소를 HTML과 같은 트리 구조로 출력
     console.log(p);
     console.dir(p);
+
+    // 요소를 JSON과 같은 트리 구조로 출력
 
     console.clear();
 
     // Grouping together
-    dogs.forEach(dog =>{
+     // 이름으로 그룹화
+    dogs.forEach(dog => {
       console.groupCollapsed(`${dog.name}`);
-      console.log(`${dog.name}`);
-      console.log(`${dog.name} is ${dog.age} years old`);
-      console.log(`${dog.name} is ${dog.age * 7} dog years old`);
+      console.log(`${dog.name} age is ${dog.age}`);
       console.groupEnd(`${dog.name}`);
       console.log(`${dog.name}`);
     })
+       // 그룹화 종료
+   
 
     console.clear();
-    // counting
-    console.count('Wes');
-    console.count('Wes');
-    console.count('Steve');
-    console.count('Steve');
-    console.count('Wes');
-    console.count('Steve');
-    console.count('Wes');
-    console.count('Steve');
-    console.count('Steve');
-    console.count('Steve');
-    console.count('Steve');
-    console.count('Steve');
-
+    // counting 
+    console.count('was');
+    console.count('gand');
+    console.count('gand');
+    console.count('was');
+    console.count('gand');
+    console.count('gand');
+    console.count('was');
+    console.count('gand');
+    console.count('gand');
+    
     // timing
     console.time('fetching data');
-    fetch('https://api.github.com/users/wesbos')
-    .then(data => data.json())
-    .then(data => {
+    fetch('https://api.github.com/users/wesbos').then(data=> data.json())
+    .then(data=>{
       console.timeEnd('fetching data');
       console.log(data);
     });
-    console.table(dogs);
+   
   </script>
 </body>
 </html>

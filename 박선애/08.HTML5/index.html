@@ -9,15 +9,15 @@
 <script>
   const canvas = document.querySelector('#draw');
   const ctx = canvas.getContext('2d'); //2d 사용
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
+  canvas.width = window.innerWidth; // 캔버스 너비
+  canvas.height = window.innerHeight; // 캔버스 높이
   ctx.strokeStyle = '#BADA55'; // 도형에 색 적용
   ctx.lineJoin = 'round'; // 선이 꺾이는 부분 스타일
   ctx.lineCap = 'round' // 선 끝부분 스타일
-  ctx.lineWidth = 100;
-  // ctx.globalCompositeOperation = 'multiply';
+  ctx.lineWidth = 100; // 선 굵기
+  // ctx.globalCompositeOperation = 'multiply'; 색이 계속 겹치면서 결국 검정색 됨
 
-  let isDrawing = false;
+  let isDrawing = false; 
   let lastX = 0;
   let lastY = 0;
   let hue = 0;
@@ -29,15 +29,16 @@
     ctx.strokeStyle = `hsl(${hue}, 100%, 50%)`;
     ctx.beginPath(); // 경로 만들기 첫 단계
     ctx.moveTo(lastX, lastY);
-    ctx.lineTo(e.offsetX, e.offsetY);
+    ctx.lineTo(e.offsetX, e.offsetY); 
+    // offsetX : 상대적 마우스 x좌표, y좌표 위치, 지정된 위치까지 선을 그림
     ctx.stroke(); // 선의 종류 지정 moveTo(), lineTo()는 stroke() 필요
     [lastX, lastY] = [e.offsetX, e.offsetY];
 
     hue++;
-    if(hue >=360){
-      hue = 0;
+    if(hue >=360){ // 선 색 범위 넘어가면
+      hue = 0; // 다시 빨간색으로
     }
-    if(ctx.lineWidth >= 100 || ctx.lineWidth <=1){
+    if(ctx.lineWidth >= 100 || ctx.lineWidth <=1){ //선 굵기 조정
       direction = !direction;
     }
     if(direction){
@@ -47,14 +48,14 @@
     }
   }
 
-  canvas.addEventListener('mousedown', (e)=>{
+  canvas.addEventListener('mousedown', (e)=>{ // 마우스 눌렸을 때
     isDrawing = true;
     [lastX, lastY] = [e.offsetX, e.offsetY];
   });
 
-  canvas.addEventListener('mousemove', draw);
-  canvas.addEventListener('mouseup', () => isDrawing = false);
-  canvas.addEventListener('mouseout', () => isDrawing = false);
+  canvas.addEventListener('mousemove', draw); // 마우스 움직이면 draw() 호출
+  canvas.addEventListener('mouseup', () => isDrawing = false); // 마우스 버튼 눌렀다가 뗄 때 안 그림
+  canvas.addEventListener('mouseout', () => isDrawing = false); // 마우스가 요소 벗어날 때 안 그림
   
 </script>
 
