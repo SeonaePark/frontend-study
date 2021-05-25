@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Mouse Shadow</title>
+</head>
+<body>
+
+  <div class="hero">
+    <h1 contenteditable>🔥WOAH!</h1>
+  </div>
+
+  <style>
+  html {
+    color: black;
+    font-family: sans-serif;
+  }
+
+  body {
+    margin: 0;
+  }
+
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+  }
+
+  h1 {
+    text-shadow: 10px 10px 0 rgba(0,0,0,1);
+    font-size: 100px;
+  }
+  </style>
+
+<script>
+  const hero = document.querySelector('.hero'); // 텍스트가 있는 hero 클래스 
+  const text = hero.querySelector('h1'); // WOAH!라는 텍스트
+  const walk = 100; // 100px 그림자 움직임 결정
+
+  function shadow(e){
+    // const width = hero.offsetWidth;
+    // const height = hero.offsetHeight;
+    const { offsetWidth: width, offsetHeight: height } = hero; // width는 hero 가로길이, height는 hero 세로길이
+    let { offsetX : x, offsetY : y } = e; // 마우스 위치 절대 좌표
+  
+
+    if (this !== e.target){ // e.target이 hero 안에 있는 h1태그를 가리킬 때 target이 바껴서 
+      x = x + e.target.offsetLeft;
+      y = y + e.target.offsetTop;
+    }
+    const xWalk = Math.round((x / width * walk) - (walk / 2)); // -50에서 50
+    const yWalk = Math.round((y / height * walk) - (walk / 2)); // -50에서 50
+
+    text.style.textShadow = `
+    ${xWalk}px ${yWalk}px 0 rgba(255,178,85,0.7),
+    ${yWalk  *- 1}px ${xWalk}px 0 rgba(123,123,200,0.7),
+    ${xWalk *- 1}px ${yWalk}px 0 rgba(130,70,150,0.7),
+    ${yWalk}px ${xWalk *-1}px 0 rgba(85,41,78,0.7)
+    `;
+  }
+  hero.addEventListener('mousemove', shadow);
+</script>
+</body>
+</html>

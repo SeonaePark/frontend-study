@@ -30,8 +30,10 @@
   const itemsList = document.querySelector('.plates');
   const items = JSON.parse(localStorage.getItem('items')) || [];
 
+  /* 아이템 추가 */
   function addItem(e) {
     e.preventDefault();
+    //input에 입력한 텍스트 값
     const text = (this.querySelector('[name=item]')).value;
     const item = {
       text,
