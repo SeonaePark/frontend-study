@@ -37,27 +37,32 @@
 <script>
   const hero = document.querySelector('.hero'); // 텍스트가 있는 hero 클래스 
   const text = hero.querySelector('h1'); // WOAH!라는 텍스트
-  const walk = 100; // 100px 그림자 움직임 결정
+  const walk = 300; // 300px으로 그림자 움직임 거리 결정
 
   function shadow(e){
-    // const width = hero.offsetWidth;
-    // const height = hero.offsetHeight;
+    /*
+      offset은 절대좌표
+      const width = hero.offsetWidth; 
+      const height = hero.offsetHeight;
+    */ 
     const { offsetWidth: width, offsetHeight: height } = hero; // width는 hero 가로길이, height는 hero 세로길이
     let { offsetX : x, offsetY : y } = e; // 마우스 위치 절대 좌표
-  
+    console.log(x,y);
 
     if (this !== e.target){ // e.target이 hero 안에 있는 h1태그를 가리킬 때 target이 바껴서 
-      x = x + e.target.offsetLeft;
+      x = x + e.target.offsetLeft; // x좌표에 h1 왼쪽으로부터 절대좌표 더함
       y = y + e.target.offsetTop;
     }
-    const xWalk = Math.round((x / width * walk) - (walk / 2)); // -50에서 50
-    const yWalk = Math.round((y / height * walk) - (walk / 2)); // -50에서 50
+    console.log(x,y);
+
+    const xWalk = Math.round((x / width * walk) - (walk / 2)); // -50에서 50 소수점아래 자름
+    const yWalk = Math.round((y / height * walk) - (walk / 2)); // -50에서 50 소수점 아래 자름
 
     text.style.textShadow = `
-    ${xWalk}px ${yWalk}px 0 rgba(255,178,85,0.7),
-    ${yWalk  *- 1}px ${xWalk}px 0 rgba(123,123,200,0.7),
-    ${xWalk *- 1}px ${yWalk}px 0 rgba(130,70,150,0.7),
-    ${yWalk}px ${xWalk *-1}px 0 rgba(85,41,78,0.7)
+    ${xWalk}px ${yWalk}px 0 rgba(255,0,0,1),
+    ${xWalk *- 1}px ${yWalk}px 0 rgba(0,255,0,0.7), // 위에랑 x축에서 반대로
+    ${yWalk}px ${xWalk *-1}px 0 rgba(123, 123, 123,7),
+    ${yWalk  *- 1}px ${xWalk}px 0 rgba(0,0,255,0.7) // 위에랑 y축에서 반대로
     `;
   }
   hero.addEventListener('mousemove', shadow);
