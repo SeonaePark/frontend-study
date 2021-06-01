@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Speech Synthesis</title>
+  <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="voiceinator">
+
+      <h1>The Voiceinator 5000</h1>
+
+      <select name="voice" id="voices">
+        <option value="">Select A Voice</option>
+      </select>
+
+      <label for="rate">Rate:</label>
+      <input name="rate" type="range" min="0" max="3" value="1" step="0.1">
+
+      <label for="pitch">Pitch:</label>
+
+      <input name="pitch" type="range" min="0" max="2" step="0.1">
+      <textarea name="text">Hello! I love JavaScript 👍</textarea>
+      <button id="stop">Stop!</button>
+      <button id="speak">Speak</button>
+
+    </div>
+
+<script>
+  const msg = new SpeechSynthesisUtterance(); // Web Speech API의 하나로 주어진 텍스트를 소리로 바꿔주는 TTS API
+  let voices = []; // voice 리스트
+  const voicesDropdown = document.querySelector('[name="voice"]'); // name이 voice인 select 내역
+  const options = document.querySelectorAll('[type="range"], [name="text"]'); // rate, pitch 적용 범위와 text
+  const speakButton = document.querySelector('#speak'); // speak 버튼
+  const stopButton = document.querySelector('#stop'); // stop 버튼
+  msg.text = document.querySelector('[name="text"]').value;
+
+  function populateVoices(){
+    voices = this.getVoices(); // getVoices()는 현재 장치에서 사용가능한 모든 음성을 나타내는 SpeechSynthesisVoice 개체 목록을 반환한다.
+    voicesDropdown.innerHTML = voices
+      //.filter(voice => voice.lang.includes('en'))
+      .map(voice => `<option value="${voice.name}">${voice.name} (${voice.lang})</option>`) // voices 목록으로 새롭게 배열 만들어서 넣어줌
+      .join(''); 
+  }
+
+  function setVoice(){
+    msg.voice = voices.find(voice=> voice.name === this.value);
+    // 현재 장치에서 사용가능한 음성의 name이랑 voicesDropdown에서 선택한 것의 value와 같은 것 찾음
+    toggle(); 
+  }
+
+  function toggle(startOver = true){ // 다른 언어 선택하면 
+    speechSynthesis.cancel(); // 음성 출력되던거 멈추고
+    if(startOver){ // true면
+      speechSynthesis.speak(msg); // 선택된 언어로 음성 출력됨
+    }
+  }
+
+  function setOption(){
+    console.log(this.name, this.value); // 범위 조절한 것에 따라서 rate value 또는 pitch value로 출력됨
+    msg[this.name] = this.value; // 값 바꿔줌
+  }
+
+  speechSynthesis.addEventListener('voiceschanged',populateVoices);
+  voicesDropdown.addEventListener('change', setVoice); // voicesDropdown 선택해서 바뀔 때
+  options.forEach(option => option.addEventListener('change', setOption));
+  speakButton.addEventListener('click', toggle)
+  stopButton.addEventListener('click', function(){
+    toggle(false);
+  });
+</script>
+
+</body>
+</html>
