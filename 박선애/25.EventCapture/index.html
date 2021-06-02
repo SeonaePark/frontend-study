@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Understanding JavaScript's Capture</title>
+</head>
+<body class="bod">
+
+  <div class="one">
+    <div class="two">
+      <div class="three">
+      </div>
+    </div>
+  </div>
+
+<style>
+  html {
+    box-sizing: border-box;
+  }
+  
+  *, *:before, *:after { 
+    box-sizing: inherit; 
+  }
+
+  div {
+    width: 100%;
+    padding: 100px;
+  }
+
+  .one {
+    background: thistle;
+  }
+
+  .two {
+    background: mistyrose;
+  }
+
+  .three {
+    background: coral;
+  }
+</style>
+
+<button></button>
+<script>
+  const divs = document.querySelectorAll('div');
+  const button = document.querySelector('button');
+
+  function logText(e){
+    console.log(this.classList.value);
+    e.stopPropagation(); // stop bubbling(stop trigger events on the parents on the way on up) 클릭했을 때 부모 요소들도 출력되는 거 막음
+  }
+/*이벤트 버블링은 특정 화면 요소에서 이벤트가 발생했을 때 해당 이벤트가 더 상위의 화면 요소들로 전달되어 가는 특성*/
+
+  divs.forEach(div => div.addEventListener('click', logText,{
+    capture: false, // 이벤트 캡쳐는 이벤트 버블링과 반대 방향으로 진행되는 거
+    once: true // 클릭 여러 번해도 더이상 증가하지 않음
+  }));
+
+  button.addEventListener('click', () =>{
+    console.log('click!!');
+  }, {
+    once: true
+  });
+</script>
+</body>
+</html>
