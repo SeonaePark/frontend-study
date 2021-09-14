@@ -1,2 +1,2 @@
-#WESBOS Javascript30
-프론트엔드 스터디
+# WESBOS
+Javascript30 강의 스터디
